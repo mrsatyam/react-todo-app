@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
 
 const Todo = () => {
-  const [todo, setTodo] = useState('');
-  const [input, setInput] = useState('');
+   const [todos, setTodos] = useState([]);
+   const [input, setInput] = useState('');
 
-  const handleAddTodo = () => {
-    if (input.length > 0) {
-      setTodo(input);
-      setInput('');
-    }
-  };
-
-  const handleDeleteTodo = () => {
-      if (todo.length > 0) {
-        setTodo('');
+    const handleAddTodo = () => {
+      if (input.length > 0) {
+        setTodos([...todos, { text: input, id: Date.now() }]);
+        setInput('');
       }
     };
+
+//  const handleDeleteTodo = () => {
+//      if (todo.length > 0) {
+//        setTodo('');
+//      }
+//    };
 
   return (
     <div>
@@ -26,7 +26,11 @@ const Todo = () => {
         onChange={(e) => setInput(e.target.value)}
       />
       <button onClick={handleAddTodo}>Add Todo</button>
-          <div><p>{todo}</p><button onClick={handleDeleteTodo}>Delete</button> </div>
+        <div>
+            {todos.map(todo => (
+              <div key={todo.id}>{todo.text}</div>
+            ))}
+        </div>
     </div>
   );
 };
