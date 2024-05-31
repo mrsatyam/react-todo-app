@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Todo = () => {
+const TodoApp = () => {
    const [todos, setTodos] = useState([]);
    const [input, setInput] = useState('');
 
@@ -11,11 +11,9 @@ const Todo = () => {
       }
     };
 
-//  const handleDeleteTodo = () => {
-//      if (todo.length > 0) {
-//        setTodo('');
-//      }
-//    };
+  const handleDeleteTodo = (todoId) => {
+        setTodos(todos.filter(td => td.id !== todoId));
+    };
 
   return (
     <div>
@@ -28,11 +26,14 @@ const Todo = () => {
       <button onClick={handleAddTodo}>Add Todo</button>
         <div>
             {todos.map(todo => (
-              <div key={todo.id}>{todo.text}</div>
+              <div key={todo.id}>
+                  {todo.text}
+                  <button onClick={() => handleDeleteTodo(todo.id)}>Delete</button>
+              </div>
             ))}
         </div>
     </div>
   );
 };
 
-export default Todo;
+export default TodoApp;
