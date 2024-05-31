@@ -11,6 +11,12 @@ const Todo = () => {
     }
   };
 
+  const handleDeleteTodo = () => {
+      if (todo.length > 0) {
+        setTodo('');
+      }
+    };
+
   return (
     <div>
       <h1>Todo List</h1>
@@ -20,7 +26,7 @@ const Todo = () => {
         onChange={(e) => setInput(e.target.value)}
       />
       <button onClick={handleAddTodo}>Add Todo</button>
-          <div>{todo}</div>
+          <div><p>{todo}</p><button onClick={handleDeleteTodo}>Delete</button> </div>
     </div>
   );
 };
