@@ -1,19 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 
 const TodoApp = () => {
-   const [todos, setTodos] = useState([]);
-   const [input, setInput] = useState('');
+  const [todos, setTodos] = useState([]);
+  const [input, setInput] = useState('');
 
-    const handleAddTodo = () => {
-      if (input.length > 0) {
-        setTodos([...todos, { text: input, id: Date.now() }]);
-        setInput('');
-      }
-    };
+  const handleAddTodo = useCallback(() => {
+    if (input.trim()) {
+      setTodos([...todos, { text: input, id: Date.now() }]);
+      setInput('');
+    }
+  }, [input, todos]);
 
-  const handleDeleteTodo = (todoId) => {
-        setTodos(todos.filter(td => td.id !== todoId));
-    };
+  const handleDeleteTodo = useCallback((id) => {
+    setTodos(todos.filter(todo => todo.id !== id));
+  }, [todos]);
+
+  const handleEditTodo = useCallback((id, newText) => {
+    setTodos(todos.map(todo => (todo.id === id ? { ...todo, text: newText } : todo)));
+  }, [todos]);
+
+  const renderedTodos = useMemo(() => {
+    return todos.map(todo => (
+      <div key={todo.id}>
+        <input
+          type="text"
+          value={todo.text}
+          onChange={(e) => handleEditTodo(todo.id, e.target.value)}
+        />
+        <button onClick={() => handleDeleteTodo(todo.id)}>Delete</button>
+      </div>
+    ));
+  }, [todos, handleDeleteTodo, handleEditTodo]);
 
   return (
     <div>
@@ -24,14 +41,7 @@ const TodoApp = () => {
         onChange={(e) => setInput(e.target.value)}
       />
       <button onClick={handleAddTodo}>Add Todo</button>
-        <div>
-            {todos.map(todo => (
-              <div key={todo.id}>
-                  {todo.text}
-                  <button onClick={() => handleDeleteTodo(todo.id)}>Delete</button>
-              </div>
-            ))}
-        </div>
+      <div>{renderedTodos}</div>
     </div>
   );
 };
