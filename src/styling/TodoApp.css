@@ -1,0 +1,53 @@
+.TodoApp {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 300px;
+}
+
+.TodoApp h1 {
+  margin: 0 0 20px;
+  font-size: 24px;
+}
+
+.TodoApp input[type="text"] {
+  padding: 10px;
+  width: calc(100% - 24px);
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.TodoApp button {
+  padding: 10px 20px;
+  margin-top: 10px;
+  border: none;
+  background: #007BFF;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.TodoApp button:hover {
+  background: #0056b3;
+}
+
+.TodoApp .todo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.TodoApp .todo input[type="text"] {
+  width: calc(100% - 80px);
+  margin-right: 10px;
+}
+
+.TodoApp .todo button {
+  background: #DC3545;
+}
+
+.TodoApp .todo button:hover {
+  background: #c82333;
+}

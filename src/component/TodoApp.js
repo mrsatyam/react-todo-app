@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useMemo } from 'react';
+import '../styling/TodoApp.css';
 
 const TodoApp = () => {
   const [todos, setTodos] = useState([]);
@@ -21,7 +22,7 @@ const TodoApp = () => {
 
   const renderedTodos = useMemo(() => {
     return todos.map(todo => (
-      <div key={todo.id}>
+      <div key={todo.id} className="todo">
         <input
           type="text"
           value={todo.text}
@@ -33,7 +34,7 @@ const TodoApp = () => {
   }, [todos, handleDeleteTodo, handleEditTodo]);
 
   return (
-    <div>
+    <div className="TodoApp">
       <h1>Todo List</h1>
       <input
         type="text"
